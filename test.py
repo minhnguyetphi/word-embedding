@@ -43,4 +43,4 @@ def process_file(input_file: str, output_file: str = None):
     else:
         print(filtered_text)
 
-process_file("C:/Users/tuant/Downloads/OneDrive_2024-12-08 (2)/extracted/266_ANNUAL_2013_ENG.txt", "C:/Users/tuant/Downloads/OneDrive_2024-12-08 (2)/extracted/266_ANNUAL_2013_ENG_OUTPUT.txt")
+process_file("", "") #input_file and output file here

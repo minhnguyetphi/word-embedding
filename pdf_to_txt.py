@@ -55,8 +55,8 @@ def process_folder(input_folder, output_folder):
             extract_text_from_pdf(pdf_path, output_txt_path)
 
 # Folder paths
-input_folder = "C:/Users/tuant/Downloads/OneDrive_2024-12-08 (2)/Annual and Integrated 2"  # Replace with the path to your folder containing PDFs
-output_folder = "C:/Users/tuant/Downloads/OneDrive_2024-12-08 (2)/extracted"  # Replace with the desired output folder path
+input_folder = ""  # Replace with the path to your folder containing PDFs
+output_folder = ""  # Replace with the desired output folder path
 
 # Process all PDF files in the folder
 process_folder(input_folder, output_folder)
