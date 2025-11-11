@@ -59,11 +59,3 @@ You can config global options in the `global_options.py`. The most important opt
     
     (Optional): It is possible to manually remove or add items to the `expanded_dict.csv` before scoring the documents. 
 
-4. Use `python score.py` to score the documents. Note that the output scores for the documents are not adjusted by the document length. The program outputs three set of scores: 
-    - `outputs/scores/scores_TF.csv`: using raw term counts or term frequency (TF),
-    - `outputs/scores/scores_TFIDF.csv`: using TF-IDF weights, 
-    - `outputs/scores/scores_WFIDF.csv`: TF-IDF with Log normalization (WFIDF). 
-
-    (Optional): It is possible to use additional weights on the words (see `score.score_tf_idf()` for detail).  
-
-5. (Optional): Use `python aggregate_firms.py` to aggregate the scores to the firm-time level. 
