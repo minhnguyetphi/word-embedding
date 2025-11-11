@@ -22,8 +22,8 @@ The code requres
 
 ## Data
 We included some example data in the `data/input/` folder. The three files are
-- `documents.txt`: Each line is a document (e.g., each earnings call). Each document needs to have line breaks remvoed. The file has no header row. 
-- `document_ids.txt`: Each line is document ID (e.g., unique identifier for each earnings call). A document ID cannot have `_` or whitespaces. The file has no header row. 
+- `documents.txt`: Each line is a document (e.g., each report). Each document needs to have line breaks remvoed. The file has no header row. 
+- `document_ids.txt`: Each line is document ID (e.g., unique identifier for each report). A document ID cannot have `_` or whitespaces. The file has no header row. 
 - (Optional) `id2firms.csv`: A csv file with three columns (`document_id`:str, `firm_id`:str, `time`:int). The file has a header row. 
 
 
@@ -38,9 +38,9 @@ You can config global options in the `global_options.py`. The most important opt
 ## Running the code
 1. Use `python parse.py` to use Stanford CoreNLP to parse the raw documents. This step is relatvely slow so multiple CPU cores is recommended. The parsed files are output in the `data/processed/parsed/` folder:
     - `documents.txt`: Each line is a *sentence*. 
-    - `document_sent_ids.txt`: Each line is a id in the format of `docID_sentenceID` (e.g. doc0_0, doc0_1, ..., doc1_0, doc1_1, doc1_2, ...). Each line in the file corresponds to `documents.txt`. 
+    - `document_sent_ids.txt`: Each line is an id in the format of `docID_sentenceID` (e.g. doc0_0, doc0_1, ..., doc1_0, doc1_1, doc1_2, ...). Each line in the file corresponds to `documents.txt`. 
     
-    Note about performance: This step is time-consuming (~10 min for 100 calls). Using `python parse_parallel.py` can speed up the process considerably (~2 min with 8 cores for 100 calls) but it is not well-tested on all platforms. To not break things, the two implementations are separated. 
+    Note about performance: This step is time-consuming (~10 min for 100 reports). Using `python parse_parallel.py` can speed up the process considerably (~2 min with 8 cores for 100 reports) but it is not well-tested on all platforms. To not break things, the two implementations are separated. 
 
 2. Use `python clean_and_train.py` to clean, remove stopwords, and named entities in parsed `documents.txt`. The program then learns corpus specific phrases using gensim and concatenate them. Finally, the program trains the `word2vec` model. 
 
@@ -59,11 +59,11 @@ You can config global options in the `global_options.py`. The most important opt
     
     (Optional): It is possible to manually remove or add items to the `expanded_dict.csv` before scoring the documents. 
 
-4. Use `python score.py` to score the documents. Note that the output scores for the documents are not adjusted by the document length. The program outputs three sets of scores: 
+4. Use `python score.py` to score the documents. Note that the output scores for the documents are not adjusted by the document length. The program outputs three set of scores: 
     - `outputs/scores/scores_TF.csv`: using raw term counts or term frequency (TF),
     - `outputs/scores/scores_TFIDF.csv`: using TF-IDF weights, 
     - `outputs/scores/scores_WFIDF.csv`: TF-IDF with Log normalization (WFIDF). 
 
     (Optional): It is possible to use additional weights on the words (see `score.score_tf_idf()` for detail).  
 
-5. (Optional): Use `python aggregate_firms.py` to aggregate the scores to the firm-time level. The final scores are adjusted by the document lengths. 
+5. (Optional): Use `python aggregate_firms.py` to aggregate the scores to the firm-time level. 
