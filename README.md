@@ -57,5 +57,3 @@ You can config global options in the `global_options.py`. The most important opt
 3. Use `python create_dict.py` to create the expanded dictionary. The program outputs the following files:
     - `outputs/dict/expanded_dict.csv`: A csv file with the number of columns equal to the number of dimensions in the dictionary (five in the paper). The row headers are the dimension names. 
     
-    (Optional): It is possible to manually remove or add items to the `expanded_dict.csv` before scoring the documents. 
-
