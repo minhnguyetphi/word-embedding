@@ -30,7 +30,7 @@ N_WORDS_DIM: int = 500  # max number of words in each dimension of the dictionar
 DICT_RESTRICT_VOCAB = None # change to a fraction number (e.g. 0.2) to restrict the dictionary vocab in the top 20% of most frequent vocab
 
 # Inputs for constructing the expanded dictionary
-DIMS: List[str] = ["negative", "positive", "risk", "forward-looking", "environmental", "governance", "social", "BC"]
+DIMS: List[str] = ["negative", "positive", "risk", "forward-looking"]
 SEED_WORDS: Dict[str, List[str]] = {
      "negative": [
         "able",
