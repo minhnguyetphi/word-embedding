@@ -8,19 +8,19 @@ from tqdm import tqdm
 # Paths
 input_folder = "C:\Users\PhiMinhNguyet\Documents\RMIT\Data"  # Folder containing the .txt files
 word_file = "word_list.csv"  # CSV file path
-output_file = "word_counts_tone.xlsx"
-# Step 1: Read tone categories from CSV file
-tone_categories = defaultdict(set)
+output_file = "word_counts_theme.xlsx"
+# Step 1: Read theme categories from CSV file
+theme_categories = defaultdict(set)
 with open(word_file, 'r', encoding='utf-8') as file:
     reader = csv.reader(file)
     headers = next(reader)  # Read the header row for categories
     for row in reader:
         for category, word in zip(headers, row):
             if word.strip():
-                tone_categories[category.strip()].add(word.strip().lower())
+                theme_categories[category.strip()].add(word.strip().lower())
 
-# Step 2: Initialize word counts for tone categories    
-word_counts = {category: defaultdict(lambda: defaultdict(int)) for category in tone_categories}
+# Step 2: Initialize word counts for theme categories    
+word_counts = {category: defaultdict(lambda: defaultdict(int)) for category in theme_categories}
 
 # Step 3: Process all .txt files in the specified folder
 file_paths = [
@@ -40,20 +40,20 @@ for file_path in tqdm(file_paths, desc="Processing files"):
             # Tokenize the text into words
             words_in_text = re.findall(r'\b\w+\b', text)
 
-            # Count occurrences of tone words directly
-            for category, tone_words in tone_categories.items():
-                word_counts[category][file_id][file_year] = sum(words_in_text.count(word) for word in tone_words)
+            # Count occurrences of theme words directly
+            for category, theme_words in theme_categories.items():
+                word_counts[category][file_id][file_year] = sum(words_in_text.count(word) for word in theme_words)
 
 # Step 4: Write results to an Excel file
 workbook = openpyxl.Workbook()
 
-for tone in tqdm(tone_categories, desc="Writing to Excel"):
-    # Create a sheet for each tone category
-    sheet = workbook.create_sheet(title=tone.capitalize())
+for tone in tqdm(theme_categories, desc="Writing to Excel"):
+    # Create a sheet for each theme category
+    sheet = workbook.create_sheet(title=theme.capitalize())
     sheet.cell(row=1, column=1, value="ID \\ Year")
 
     # Write the headers dynamically
-    files_processed = sorted({(file_id, file_year) for file_id in word_counts[tone] for file_year in word_counts[tone][file_id]})
+    files_processed = sorted({(file_id, file_year) for file_id in word_counts[theme] for file_year in word_counts[theme][file_id]})
     file_years = sorted(set(year for _, year in files_processed))
     file_ids = sorted(set(file_id for file_id, _ in files_processed))
 
@@ -65,7 +65,7 @@ for tone in tqdm(tone_categories, desc="Writing to Excel"):
     for row, file_id in enumerate(file_ids, start=2):
         sheet.cell(row=row, column=1, value=file_id)
         for col, year in enumerate(file_years, start=2):
-            value = word_counts[tone][file_id][year]
+            value = word_counts[theme][file_id][year]
             sheet.cell(row=row, column=col, value=value)
 
 # Remove the default sheet if it exists and save the workbook
