@@ -1,4 +1,4 @@
-# Measuring Corporate Culture Using Machine Learning
+# Measuring ESG disclosure Using Machine Learning
 
 ## Introduction
 The repository implements the method described in the paper 
