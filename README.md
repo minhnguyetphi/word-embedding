@@ -58,10 +58,10 @@ You can config global options in the `global_options.py`. The most important opt
     - `outputs/dict/expanded_dict.csv`: A csv file with the number of columns equal to the number of dimensions in the dictionary (five in the paper). The row headers are the dimension names. 
     
 4. Use `python count.py` to count and get the final results of word count:
-- Load words from word_list.csv, grouping them by category.
-- Initialize counters for each category, file ID, and year.
-- Process all .txt files: extract ID and year from filenames, tokenize text, and count words.
-- Write results to Excel: one sheet per tone, with IDs as rows, years as columns, and counts as values.
-- Save workbook as word_counts.xlsx.
+    - Load words from word_list.csv, grouping them by categories.
+    - Initialize counters for each category, file ID, and year.
+    - Process all .txt files: extract ID and year from filenames, tokenize text, and count words.
+    - Write results to Excel: one sheet per theme, with IDs as rows, years as columns, and counts as values.
+    - Save workbook as word_counts_theme.xlsx.
 
 
